@@ -1,0 +1,14 @@
+@import url("../lib/root.css");
+@import url("../lib/text.css");
+@import url("../lib/button.css");
+
+.selected {
+    background-color: aquamarine;
+    color: black;
+}
+
+.theme {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

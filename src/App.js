@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {Signup, Login} from "./components/Identification"
+import { Themechoice } from './components/Themechoice';
+import { Tts } from './components/Tts';
 
+// Routing to sites
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+       <Routes>
+          <Route exact path="/signup" element={<Signup />}/>
+          <Route exact path="/login" element={<Login />}/>
+          <Route exact path="/themechoice" element={<Themechoice />}/>
+          <Route exact path="/tts" element={<Tts />}/>
+        </Routes>
+      </Router>
     </div>
   );
 }

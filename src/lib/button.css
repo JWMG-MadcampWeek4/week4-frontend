@@ -1,0 +1,17 @@
+@import url("./root.css");
+
+.primary-button {
+    padding: 0.9rem 1.75rem;
+    background-color: orange;
+    outline: none;
+    border: none;
+    border-radius: 5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.primary-button:hover {
+    background-color: yellowgreen;
+}
