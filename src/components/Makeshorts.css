@@ -1,0 +1,67 @@
+@import url("../lib/root.css");
+@import url("../lib/text.css");
+@import url("../lib/button.css");
+
+.backviolet {
+    height: 75vh;
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--violet200);
+}
+
+.backwhite {
+    height: 70vh;
+    width: 75vw;
+    margin-top : 2.5vh;
+    background-color: var(--gray200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.8);
+}
+
+.backclean {
+    height: 30vh;
+    margin-top : 30px;
+    width: 8vw;
+    background-color: black;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    margin-top : 30px;
+    width: 8vw;
+    position: relative;
+}
+
+.item_theme,
+.item_script,
+.item_image {
+    height: 10vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    
+}
+
+.item_theme {
+    background-color: var(--blue200);
+    width: 10vw;
+    transform: translateX(-2vw);
+}
+
+.item_script {
+    background-color: var(--marine200);
+    width: 8vw;
+}
+
+.item_image {
+    background-color: var(--green200);
+    width: 8vw;
+}
