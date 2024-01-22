@@ -1,9 +1,10 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Theme from "../lib/Theme.json";
 import "./Themechoice.css";
+import gsap from 'gsap';
 
-export function Themechoice() {
+export function Themechoice({update: fun}) {
     
     /*
     selectedTheme : first theme (json file, user can type)
@@ -11,26 +12,8 @@ export function Themechoice() {
     contentList : list of contents (5 elements, user can choose)
     content : final content, will be the value to be make script
     */
-    const [selectedTheme, setSelectedTheme] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
     const [contentList, setContentList] = useState([]);
     const [content, setContent] = useState("");
-
-    // Select Theme
-    const onSelectTheme = (e) => {
-        setSelectedTheme(e);
-        setSelectedCategory(e); // Theme cannot have category
-    };
-
-    // Set Category
-    const onSelectCategory = (e) => {
-      setSelectedCategory(e);
-    }
-
-    // Get recommendation and select content
-    const onSelectContent = (e) => {
-      setContent(e);
-    }
 
     // List of objects
     const keyOfTheme = Object.keys(Theme);
@@ -44,68 +27,129 @@ export function Themechoice() {
 
     
     // Submit Theme, category pair and get recommendation.
-    const handleSubmitTheme = () => {
-      fetch("http://143.248.219.4:8080/theme", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ theme: selectedCategory }) // send data
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-            setContentList(res);
-        })
-        .catch(error => {
-            console.log("error!");
-        });
-    }
+    // const handleSubmitTheme = () => {
+    //   fetch("http://143.248.219.4:8080/theme", {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({ theme: selectedCategory }) // send data
+    //     })
+    //     .then(res => res.json())
+    //     .then(res => {
+    //         console.log(res);
+    //         setContentList(res);
+    //     })
+    //     .catch(error => {
+    //         console.log("error!");
+    //     });
+    // }
 
-    // Choose final content and make a script
-    const handleSubmitContent = () => {
-      console.log(content);
-      fetch("http://143.248.219.4:8080/script", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ content: content }) // send data
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-            navigateToTts();
-        })
-        .catch(error => {
-            console.log("error!");
-        });
-    }
+    // // Choose final content and make a script
+    // const handleSubmitContent = () => {
+    //   console.log(content);
+    //   fetch("http://143.248.219.4:8080/script", {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({ content: content }) // send data
+    //     })
+    //     .then(res => res.json())
+    //     .then(res => {
+    //         console.log(res);
+    //         navigateToTts();
+    //     })
+    //     .catch(error => {
+    //         console.log("error!");
+    //     });
+    // }
 
 
     return (
       <>
-      <h1 className="primary-heading">
-        주제를 선택하세요.
-      </h1>
-      <h1 className="medium-primary-heading">
-        카테고리를 선택하세요.
-      </h1>
-      <ListWithButton className="theme" update={onSelectTheme} list={keyOfTheme} />
-      <ListWithButton
-        className="category"
-        update={onSelectCategory}
-        list={Theme[selectedTheme] || []}
-      />
-      <ListWithButton
-        className="recommend"
-        update={onSelectContent}
-        list={contentList || []}
-      />
-      <button className = "primary-button" onClick = {handleSubmitTheme}>검색하기</button>
-      <button className = "primary-button" onClick = {handleSubmitContent}>대본얻기</button>
-    </>
+        <ListWithButton className="theme" update={fun} list={keyOfTheme} />
+      </>
     )
+}
+
+export function CategoryChoice({theme: theme, update: fun}){
+
+  // List of objects
+  const keyOfTheme = Object.keys(Theme);
+  const categoryList = Theme[theme];
+
+  // Rotating Disk
+  useEffect(() => {
+    const rotationAnimation = gsap.to('.fileblack_cat', {
+      rotation: 360, 
+      duration: 3,
+      repeat: -1,
+      ease: 'linear',
+    });
+
+    return () => {
+      rotationAnimation.kill();
+    };
+  }, []);
+
+  return (
+  <div className = "categoryitems">
+    <div className = "filezip">
+    <div className = "fileblack_cat">
+      <div className = "filered_cat">
+        <div className = "fileempty_cat"></div>
+      </div>
+    </div>
+    </div>
+    <div className = "category">
+      <h1 className = "text_playlist">PlayList</h1>
+      <ListCategory update = {fun} theme = {theme} list = {categoryList}/>
+    </div>
+  </div>
+  )
+}
+
+
+// List items. If it hovers, we can choose.
+export function ListCategory({update: fun, theme: theme, list: list}) {
+
+  // Text input
+  const [textInput, setTextInput] = useState("직접입력");
+
+  // Change the state of textInput.
+  const handleInputChange = (e) => {
+    setTextInput(e.target.value);
+  }
+
+  // Call fun. (update function)
+  const handleUpdate = () => {
+    fun(textInput);
+  }
+
+  // If we click the category, store it.
+  const handleItemClick = (item) => {
+    if (item === "상관없음") {
+      fun (theme);
+    }
+    else {
+      fun (item);
+    }
+  }
+
+  return(
+    <div className = "categoryplaylist">
+    {list.map((item) => (
+        <div className = "categoryplay" onClick = {() => handleItemClick(item)}>
+          {item}
+        </div>
+    ))}      
+      <div className = "inputcategory">
+        <input type="text" value={textInput} onChange={handleInputChange} />
+        <button onClick={handleUpdate}>제출하기</button>
+      </div>
+    </div>
+  )
 }
 
 
@@ -116,32 +160,23 @@ export function ListWithButton({update: fun, list: list}) {
     const [selectedItem, setSelectedItem] = useState("");
     
     const handleItemClick = (item) => {
-        setSelectedItem(item);
+        setSelectedItem(item);        
         fun(item);
     }
 
-
     return(
-        <div style={{ height: '800px', overflowY: 'scroll' }}>
-        {list.map((item, index) => (
-          <div
-            key={index}
-            onClick={() => handleItemClick(item)}
-            className={`city-item ${item === selectedItem ? 'selected' : ''}`}
-            style={{
-              height: '10%',
-              width: '20%',
-              borderRadius: '40px',
-              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
-              marginBottom: '20px',
-              margin: '20px',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexWrap: 'wrap'
-          }}
-          >
-            <h1 className = "small-primary-heading" style = {{margin: '10px', flex: '1'}}>{item}</h1>
-          </div>
+        <div className = "themeitems">
+        {list.map((item) => (
+            <div className = "fileback" data-item = {item} onClick={() => handleItemClick(item)}>
+              <div className = "filefront">
+                {item}
+              </div>
+              <div className = "fileblack">
+                <div className = "filered">
+                <div className = "fileempty"></div>
+                </div>
+              </div>
+            </div>
         ))}
       </div>
     )

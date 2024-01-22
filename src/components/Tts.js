@@ -11,7 +11,7 @@ export function Tts() {
     setAudioContent(e);
   };
 
-  
+
   // Make voice.
   const handleTestButtonClick = () => {
     scriptToAudioContent({script: textValue, onChange: getAudioContent})
@@ -62,7 +62,6 @@ export function scriptToAudioContent({script, onChange}){
         contentType: 'application/json; charset=UTF-8',
         success: function (res) {
           onChange(res.audioContent);
-          console.log("Success.");
           scriptToVoice({audioContent : res.audioContent});
         },
         error: function (request, status, error) {
@@ -75,7 +74,6 @@ export function scriptToAudioContent({script, onChange}){
 // Function that makes script to voice.
 export function scriptToVoice({audioContent: audioContent}) {
     
-    console.log(audioContent);
     const audioFile = new Audio();
     const audioBlob = base64ToBlob(audioContent, 'mp3');
     audioFile.src = window.URL.createObjectURL(audioBlob);

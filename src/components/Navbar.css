@@ -1,0 +1,23 @@
+@import url("../lib/root.css");
+@import url("../lib/text.css");
+@import url("../lib/button.css");
+
+.navbar {
+    height: 10vh;
+    margin: 40px;
+    margin-right: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo-container {
+    height: 70%;
+}
+
+.nav-logo-container img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
