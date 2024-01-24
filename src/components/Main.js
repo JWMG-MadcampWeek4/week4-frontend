@@ -1,9 +1,12 @@
 import "./Main.css";
 import { Navbar } from "./Navbar";
 import YouTube from "react-youtube";
+import { useNavigate } from "react-router-dom";
 
-export function Main(){
+export function Main({id, nick}){
 
+
+    console.log(id, nick, "here");
     const shortsurlList = ['mvRw79EJdkU', 'GRmTksRYwXI', 'AEqzqC4lekM'];
     const makeurlList = ['vH15rSVO1H0?si=zOIJFcbxYgRsA5hv'] 
 
