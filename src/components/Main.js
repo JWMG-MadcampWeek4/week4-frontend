@@ -64,7 +64,7 @@ export function Main({id, nick}){
             <div className = "myshorts">
                 <div className = "myshortstextarea">내가 만든 쇼츠</div>
                 <div className = "myshortsarea">
-                    {myshortsUrl.map((item) =>(
+                    {shortsurlList.map((item) =>(
                     <div className = "myshortscontent">
                         <YouTube
                         videoId={item}

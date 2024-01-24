@@ -2,24 +2,17 @@ import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Theme from "../lib/Theme.json";
 import "./Themechoice.css";
-import gsap from 'gsap';
 
 export function Themechoice({update: fun}) {
     
     /*
     selectedTheme : first theme (json file, user can type)
     selectedCategory : selected category (json file, user can type)
-    contentList : list of contents (5 elements, user can choose)
-    content : final content, will be the value to be make script
     */
-    const [contentList, setContentList] = useState([]);
-    const [content, setContent] = useState("");
 
     // List of objects
     const keyOfTheme = Object.keys(Theme);
 
-    // Navigation
-    const navigate = useNavigate();
 
     return (
       <>
@@ -28,46 +21,51 @@ export function Themechoice({update: fun}) {
     )
 }
 
-export function CategoryChoice({theme: theme, update: fun}){
+// List items with button. Clickable induces changes.
+export function ListWithButton({update: fun, list: list}) {
+  
+
+  const [selectedItem, setSelectedItem] = useState("");
+  
+  const handleItemClick = (item) => {
+      setSelectedItem(item);        
+      fun(item);
+  }
+
+  return(
+      <div className = "themeitemsfullpage">
+        <div className = "text200">
+          Theme.
+        </div>
+        <div className = "text400">
+          관심있는 주제를 골라보세요.
+        </div>
+        <div className = "themeitems">
+          {list.map((item) => (
+            <div className = "themeitembox" onClick = {() => handleItemClick(item)}>
+              <div className = "themeitemtext">{item}</div>
+            </div>
+          ))}
+        </div>
+    </div>
+  )
+}
+
+export function CategoryChoice({theme: theme, update: fun, goback: goback}){
 
   // List of objects
-  const keyOfTheme = Object.keys(Theme);
   const categoryList = Theme[theme];
 
-  // Rotating Disk
-  useEffect(() => {
-    const rotationAnimation = gsap.to('.fileblack_cat', {
-      rotation: 360, 
-      duration: 3,
-      repeat: -1,
-      ease: 'linear',
-    });
-
-    return () => {
-      rotationAnimation.kill();
-    };
-  }, []);
-
   return (
-  <div className = "categoryitems">
-    <div className = "filezip">
-    <div className = "fileblack_cat">
-      <div className = "filered_cat">
-        <div className = "fileempty_cat"></div>
-      </div>
-    </div>
-    </div>
-    <div className = "category">
-      <h1 className = "text_playlist">PlayList</h1>
-      <ListCategory update = {fun} theme = {theme} list = {categoryList}/>
-    </div>
+  <div className = "categoryitemsfullpage">
+      <ListCategory update = {fun} theme = {theme} list = {categoryList} goback = {goback}/>
   </div>
   )
 }
 
 
 // List items. If it hovers, we can choose.
-export function ListCategory({update: fun, theme: theme, list: list}) {
+export function ListCategory({update: fun, theme: theme, list: list, goback: goback}) {
 
   // Text input
   const [textInput, setTextInput] = useState("직접입력");
@@ -94,45 +92,29 @@ export function ListCategory({update: fun, theme: theme, list: list}) {
 
   return(
     <div className = "categoryplaylist">
-    {list.map((item) => (
-        <div className = "categoryplay" onClick = {() => handleItemClick(item)}>
-          {item}
-        </div>
-    ))}      
+      <div className = "text200">
+          Category.
+      </div>
+      <div className = "text400">
+          어떤 카테고리가 좋을까요?
+      </div>
+      <div className = "categoryitems">
+          {list.map((item) => (
+            <div className = "themeitembox" onClick = {() => handleItemClick(item)}>
+              <div className = "themeitemtext">{item}</div>
+            </div>
+          ))}
+        </div>    
       <div className = "inputcategory">
         <input type="text" value={textInput} onChange={handleInputChange} />
-        <button onClick={handleUpdate}>제출하기</button>
+        <div onClick={handleUpdate} className = "categorysubmit">
+          <div className = "categorysubmittext">제출하기</div>
+        </div>
+      </div>
+      <div className = "goback" onClick = {() => goback()}>
+          뒤로가기
       </div>
     </div>
   )
 }
 
-
-// List items with button. Clickable induces changes.
-export function ListWithButton({update: fun, list: list}) {
-  
-
-    const [selectedItem, setSelectedItem] = useState("");
-    
-    const handleItemClick = (item) => {
-        setSelectedItem(item);        
-        fun(item);
-    }
-
-    return(
-        <div className = "themeitems">
-        {list.map((item) => (
-            <div className = "fileback" data-item = {item} onClick={() => handleItemClick(item)}>
-              <div className = "filefront">
-                {item}
-              </div>
-              <div className = "fileblack">
-                <div className = "filered">
-                <div className = "fileempty"></div>
-                </div>
-              </div>
-            </div>
-        ))}
-      </div>
-    )
-}

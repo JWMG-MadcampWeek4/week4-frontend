@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, React, useRef } from "react";
 import "./Makeshorts.css";
 import { Navbar } from "./Navbar.js";
 import { CategoryChoice, Themechoice } from "./Themechoice.js";
 import { Tts } from "./Tts.js";
 import { ChooseImage } from "./ChooseImage.js";
+import { gsap } from 'gsap';
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 
 export function Makeshorts(){
 
@@ -22,19 +24,7 @@ export function Makeshorts(){
     const [imageUrlList, setImageUrlList] = useState([]);
     
     var page;
-    var themestyle, scriptstyle, imagestyle;
-
-
-    // PageBar setting
-    const defaultPageBar = {
-        transform: `translateX(0vw)`,
-        width: `8vw`
-    }
-
-    const pointPageBar = {
-        transform: `translateX(-2vw)`,
-        width: `10vw`
-    }
+    gsap.registerPlugin(MotionPathPlugin);
 
     // Update theme, category, script and image.
     const onChangeTheme = (e) => {
@@ -56,6 +46,21 @@ export function Makeshorts(){
         setImageScriptList(imageScript);
         setImageUrlList(imageUrl);
     }
+
+    // gsap animation to show.
+    useEffect(() => {
+        const backOfRecord = document.querySelector('.backofrecord');
+        const recordImage = document.querySelector('.recordimage');
+        const makeshortscontentpage = document.querySelector('.makeshortscontentpage');
+        
+        gsap.set(backOfRecord, { x: '30vw', y: '0vh', opacity: 0, transformOrigin: 'center center' });
+        gsap.to(backOfRecord, { duration: 2, opacity: 1, ease: 'power2.inOut' });
+        gsap.set(recordImage, { rotation: 0, transformOrigin: 'center center' });
+        gsap.to(recordImage, { duration: 4, rotation: 360, repeat: -1, ease: 'linear', delay : 3 });
+        gsap.to(backOfRecord, { duration: 2, x: '-50%', ease: 'power2.inOut', delay: 5 });
+        gsap.to(makeshortscontentpage, { duration: 1, x: '-12.5vw', y: '0', opacity: 1, ease: 'power2.inOut', delay: 7 });
+    }, []);
+
 
     // Step changes
     const goFront = () => {
@@ -79,48 +84,44 @@ export function Makeshorts(){
 
     // Show different pages and different bar for each page.
     if (step === 11) {
-        
         page = <Themechoice update = {onChangeTheme}/>;
-        themestyle = pointPageBar;
-        scriptstyle = defaultPageBar;
-        imagestyle = defaultPageBar;
-
     }
     else if (step === 12) {
-        
-        page = <CategoryChoice theme = {theme} update = {onChangeCategory}/>
-        themestyle = pointPageBar;
-        scriptstyle = defaultPageBar;
-        imagestyle = defaultPageBar;
-
+        page = <CategoryChoice theme = {theme} update = {onChangeCategory} goback = {goBack}/>
     }
     else if (step === 21) {
         page = <Tts theme = {theme} category = {category} update = {onChangeScript}/>;
-        themestyle = defaultPageBar;
-        scriptstyle = pointPageBar;
-        imagestyle = defaultPageBar;
     }
     else {
         page = <ChooseImage theme = {theme} category = {category} script = {script} update = {onChangeImage}/>
-        themestyle = defaultPageBar;
-        scriptstyle = defaultPageBar;
-        imagestyle = pointPageBar;
     }
 
+    const audioRef = useRef(null);
+
+    const playAudio = () => {
+        const recordImage = document.querySelector('.recordimage');
+      
+        if (audioRef.current.paused) {
+          audioRef.current.play();
+          gsap.set(recordImage, { rotation: 0, transformOrigin: 'center center' });
+          gsap.to(recordImage, { duration: 2, rotation: 360, repeat: -1, ease: 'linear', transformOrigin: 'center center' });
+        } else {
+          audioRef.current.pause();
+          gsap.killTweensOf(recordImage);
+          gsap.set(recordImage, { rotation: 0, transformOrigin: 'center center' });
+        }
+    };
 
     return (
-    <>
-        <Navbar/>
-        <div className = "backviolet">
-            <div className = "backwhite">
-                {page}
-            </div>
-            <div className = "items">
-                <div className = "item_theme" style = {themestyle}></div>
-                <div className = "item_script" style = {scriptstyle}></div>
-                <div className = "item_image" style = {imagestyle}></div>
+    <div className = "makeshortsfullpage">
+        <div className = "backofrecord">
+            <div className = "recordimage" onClick = {() => playAudio()}>
+                <audio ref={audioRef} src= "/FreestyleY.mp3"/>
             </div>
         </div>
-    </>
+        <div className = "makeshortscontentpage">
+            {page}
+        </div>
+    </div>
     )
 }

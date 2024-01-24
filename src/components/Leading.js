@@ -6,6 +6,12 @@ export function Leading() {
     
     const navigate = useNavigate();
     
+    const goToMake = () => {
+        setTimeout(() => {
+          navigate('/make');
+        }, 1000);
+    };
+
     return (
         <>
         <Navbar/>
@@ -17,7 +23,7 @@ export function Leading() {
                 </div>
             </div>
             <div className = "makeshortsbutton">
-                <div className = "makeshortsbuttontext" onClick = {() => navigate('/make')}>Let's Go.</div>
+                <div className = "makeshortsbuttontext" onClick = {() => goToMake()}>Let's Go.</div>
             </div>
         </div>
         </>
