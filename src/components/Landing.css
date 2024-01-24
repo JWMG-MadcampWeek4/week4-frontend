@@ -1,0 +1,26 @@
+@import url("../lib/root.css");
+@import url("../lib/text.css");
+@import url("../lib/button.css");
+
+.Landing {
+    display: flex;
+    flex-direction: row;
+    margin : 0;
+}
+
+.intrologo {
+    width : 40vw;
+    height : 100vh;
+    background-image: url("../lib/pics/IntroLogo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.LandingIdentification {
+    width : 60vw;
+    height : 100vh;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+}
