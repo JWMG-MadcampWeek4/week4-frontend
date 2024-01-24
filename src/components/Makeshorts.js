@@ -3,6 +3,7 @@ import "./Makeshorts.css";
 import { Navbar } from "./Navbar.js";
 import { CategoryChoice, Themechoice } from "./Themechoice.js";
 import { Tts } from "./Tts.js";
+import { ChooseImage } from "./ChooseImage.js";
 
 export function Makeshorts(){
 
@@ -17,6 +18,8 @@ export function Makeshorts(){
     const [theme, setTheme] = useState("");
     const [category, setCategory] = useState("");
     const [script, setScript] = useState("");
+    const [imageScriptList, setImageScriptList] = useState([]);
+    const [imageUrlList, setImageUrlList] = useState([]);
     
     var page;
     var themestyle, scriptstyle, imagestyle;
@@ -46,6 +49,12 @@ export function Makeshorts(){
 
     const onChangeScript = (e) => {
         setScript(e);
+        goFront();
+    }
+
+    const onChangeImage = ({imageScript, imageUrl}) => {
+        setImageScriptList(imageScript);
+        setImageUrlList(imageUrl);
     }
 
     // Step changes
@@ -92,6 +101,7 @@ export function Makeshorts(){
         imagestyle = defaultPageBar;
     }
     else {
+        page = <ChooseImage theme = {theme} category = {category} script = {script} update = {onChangeImage}/>
         themestyle = defaultPageBar;
         scriptstyle = defaultPageBar;
         imagestyle = pointPageBar;

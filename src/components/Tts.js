@@ -127,6 +127,7 @@ export function Tts({theme, category, update}) {
         <button onClick={() => handleTestButtonClick()}>TTS 변환</button>
         <button onClick={() => playAudioContent()}>재생 혹은 정지</button>
         <button onClick={() => downloadClick()}>다운로드</button>
+        <button onClick={() => update(script)}>스크립트 저장 및 다음 단계로</button>
         <textarea id="textVal" rows="5" cols="20" value={audioContent}></textarea>
       </div>
   );
