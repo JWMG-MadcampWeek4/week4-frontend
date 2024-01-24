@@ -20,10 +20,10 @@ function App() {
     <div className="App">
       <Router>
        <Routes>
-          <Route exact path="/" element = {<Landing/>} />
+          <Route exact path="/" element = {<Landing opt = {1}/>} />
           <Route exact path="/main" element = {<Main/>} />
-          <Route exact path="/signup" element={<Signup />}/>
-          <Route exact path="/login" element={<Login />}/>
+          <Route exact path="/signup" element={<Landing opt = {0} />}/>
+          <Route exact path="/login" element={<Landing opt = {1} />}/>
           <Route exact path="/make" element={<Makeshorts />}/>
           <Route exact path="/tts" element={<Tts />}/>
           <Route exact path="/text" element={<Textcheck />}/>

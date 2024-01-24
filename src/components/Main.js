@@ -10,7 +10,7 @@ export function Main(){
     return (
         <>
         <Navbar/>
-        <div className = "Landing">
+        <div className = "MainLanding">
             <div className = "Introduction">
                 <div className = "Introtextarea">
                     <div className = "text200">Be Creative.</div>
