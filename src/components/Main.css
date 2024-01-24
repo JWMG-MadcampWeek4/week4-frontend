@@ -1,0 +1,59 @@
+@import url("../lib/root.css");
+@import url("../lib/text.css");
+@import url("../lib/button.css");
+
+.Landing {
+    width : 95vw;
+    margin-left : 2.5vw;
+    margin-right : 2.5vw;
+    margin-top : 3vh;
+}
+
+.Introduction {
+    width : 100vw;
+    height : 50vh;
+    background-image: url(../lib/pics/Introduction.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.Introtextarea {
+    text-align: start;
+}
+
+.Introtextarea .introdescript {
+    margin-top : 10px;
+    font-family : "ssangmun";
+    font-size : 3vh;
+    color : white;
+}
+
+.myshorts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-top : 3vh;
+}
+
+.myshortstextarea {
+    font-family : "ssangmun";
+    font-size : 3vh;
+    color : white;
+}
+
+.myshortsarea {
+    overflow-x: hidden;
+    display : flex;
+    flex-direction: row;
+}
+
+.myshortscontent {
+    margin-top : 3vh;
+    margin-right : 3vh;
+}

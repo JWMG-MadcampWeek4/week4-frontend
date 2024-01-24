@@ -16,7 +16,8 @@ export function Navbar(){
     return (
         <div className = "navbar">
             <div className = "nav-logo-container" onClick = {navigateToHome}>
-                <img src = {Logo} alt = ""/>
+                {/* <img src = {Logo} alt = ""/> */}
+                <p className = "text400"> ShortsMaker.</p>
             </div>
             
             <div className="navbar-links-container">
