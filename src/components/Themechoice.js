@@ -20,51 +20,6 @@ export function Themechoice({update: fun}) {
 
     // Navigation
     const navigate = useNavigate();
-    const navigateToTts = () => {
-      navigate('/tts')
-  };
-
-
-    
-    // Submit Theme, category pair and get recommendation.
-    // const handleSubmitTheme = () => {
-    //   fetch("http://143.248.219.4:8080/theme", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({ theme: selectedCategory }) // send data
-    //     })
-    //     .then(res => res.json())
-    //     .then(res => {
-    //         console.log(res);
-    //         setContentList(res);
-    //     })
-    //     .catch(error => {
-    //         console.log("error!");
-    //     });
-    // }
-
-    // // Choose final content and make a script
-    // const handleSubmitContent = () => {
-    //   console.log(content);
-    //   fetch("http://143.248.219.4:8080/script", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({ content: content }) // send data
-    //     })
-    //     .then(res => res.json())
-    //     .then(res => {
-    //         console.log(res);
-    //         navigateToTts();
-    //     })
-    //     .catch(error => {
-    //         console.log("error!");
-    //     });
-    // }
-
 
     return (
       <>

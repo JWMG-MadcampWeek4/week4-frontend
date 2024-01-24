@@ -2,6 +2,12 @@
 @import url("../lib/text.css");
 @import url("../lib/button.css");
 
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 .MainLanding {
     width : 95vw;
     margin-left : 2.5vw;
@@ -10,7 +16,7 @@
 }
 
 .Introduction {
-    width : 100vw;
+    width : 96.5vw;
     height : 50vh;
     background-image: url(../lib/pics/Introduction.png);
     background-repeat: no-repeat;
@@ -31,6 +37,32 @@
     font-family : "ssangmun";
     font-size : 3vh;
     color : white;
+}
+
+.makeshortsbutton {
+    width : 20vw;
+    height : 5vh;
+    border-radius: 5rem;
+    margin-top : 3vh;
+    transform : translate(0, 5vh);
+    display : flex;
+    flex-direction : row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.makeshortsbutton:hover {
+    background-color: #40b884;
+}
+
+.makeshortsbutton:hover .makeshortsbuttontext {
+    animation: blink 0.3s 3;
+}
+
+.makeshortsbuttontext {
+    font-family : "ssangmun";
+    font-size : 3vh;
 }
 
 .myshorts {

@@ -6,6 +6,7 @@ import { Textcheck } from './components/Textcheck';
 import { Makeshorts } from './components/Makeshorts';
 import { Main } from './components/Main';
 import { Landing } from './components/Landing';
+import { Leading } from './components/Leading';
 import { useState, useEffect } from 'react';
 
 // Routing to sites
@@ -32,10 +33,11 @@ function App() {
     <div className="App">
       <Router>
        <Routes>
-          <Route exact path="/" element = {<Landing opt = {1}/>} />
+          <Route exact path="/" element = {<Landing opt = {1} update = {onUserInfoChange}/>} />
           <Route exact  path = "/main" element = {<Main id = {userId} nick = {userNick}/>} />
-          <Route exact path="/signup" element={<Landing opt = {0} />}/>
+          <Route exact path="/signup" element={<Landing opt = {0} update = {onUserInfoChange} />}/>
           <Route exact path="/login" element={<Landing opt = {1} update = {onUserInfoChange}/>}/>
+          <Route exact path="/leading" element={<Leading />}/>
           <Route exact path="/make" element={<Makeshorts />}/>
           <Route exact path="/tts" element={<Tts />}/>
           <Route exact path="/text" element={<Textcheck />}/>

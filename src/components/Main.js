@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 export function Main({id, nick}){
 
+    const navigate = useNavigate();
 
-    console.log(id, nick, "here");
     const shortsurlList = ['mvRw79EJdkU', 'GRmTksRYwXI', 'AEqzqC4lekM'];
     const makeurlList = ['vH15rSVO1H0?si=zOIJFcbxYgRsA5hv'] 
 
@@ -18,6 +18,9 @@ export function Main({id, nick}){
                 <div className = "Introtextarea">
                     <div className = "text200">Be Creative.</div>
                     <div className = "introdescript">쇼츠, 새로운 세계를 열다.</div>
+                    <div className = "makeshortsbutton">
+                        <div className = "makeshortsbuttontext" onClick = {() => navigate('/leading')}>나만의 쇼츠 만들러 가기</div>
+                    </div>                
                 </div>
             </div>
             <div className = "myshorts">
