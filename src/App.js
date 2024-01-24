@@ -5,6 +5,8 @@ import { Themechoice } from './components/Themechoice';
 import { Tts } from './components/Tts';
 import { Textcheck } from './components/Textcheck';
 import { Makeshorts } from './components/Makeshorts';
+import { Main } from './components/Main';
+import { Landing } from './components/Landing';
 
 // Routing to sites
 /*
@@ -18,6 +20,8 @@ function App() {
     <div className="App">
       <Router>
        <Routes>
+          <Route exact path="/" element = {<Landing/>} />
+          <Route exact path="/main" element = {<Main/>} />
           <Route exact path="/signup" element={<Signup />}/>
           <Route exact path="/login" element={<Login />}/>
           <Route exact path="/make" element={<Makeshorts />}/>

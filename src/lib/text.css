@@ -1,12 +1,12 @@
 @import url("./root.css");
 @font-face {
   font-family: "DXLife";
-  src: url("../lib/fonts/DXKPMB-KSCpc-EUC-H.woff") format ("woff");
+  src: url("../lib/fonts/DXKPMB-KSCpc-EUC-H.woff") format("woff");
 }
 
 @font-face {
   font-family: "ssangmun";
-  src: url("../lib/fonts/Ssangmun.ttf") format ("ttf");
+  src: url("../lib/fonts/Ssangmun.ttf") format("truetype");
 }
 
 .primary-heading {
@@ -23,30 +23,30 @@
 
 .text100 {
   font-size: 5vw;
-  font-family: "DXLife";
+  font-family: "ssangmun";
   color: white;
 }
 
 .text200 {
   font-size: 4vw;
-  font-family: "DXLife";
+  font-family: "ssangmun";
   color: white;
 }
 
 .text300 {
   font-size: 3vw;
-  font-family: "DXLife";
+  font-family: "ssangmun";
   color: white;
 }
 
 .text400 {
   font-size: 2vw;
-  font-family: "DXLife";
+  font-family: "ssangmun";
   color: white;
 }
 
 .text500 {
   font-size: 1vw;
-  font-family: "DXLife";
+  font-family: "ssangmun";
   color: white;
 }

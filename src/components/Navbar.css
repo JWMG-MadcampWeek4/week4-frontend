@@ -4,7 +4,8 @@
 
 .navbar {
     height: 10vh;
-    margin: 40px;
+    margin-left: 40px;
+    margin-top : 1vh;
     margin-right: 70px;
     display: flex;
     flex-direction: row;
@@ -13,7 +14,7 @@
 }
 
 .nav-logo-container {
-    height: 70%;
+    height : 10vh;
 }
 
 .nav-logo-container img {
