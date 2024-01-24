@@ -1,4 +1,166 @@
 @import url("../lib/root.css");
 @import url("../lib/text.css");
 @import url("../lib/button.css");
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
 
+.ttsfullpage {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.ttsfullpage .text400 {
+    margin-top : 3vh;
+}
+
+.ttscontentpage {
+    display : flex;
+    flex-direction: row;
+    width : 110%;
+    height : 65vh;
+    margin-top : 3vh
+}
+
+.ttsthemepage {
+    display : flex;
+    flex-direction : column;
+    justify-content: start;
+    align-items: center;
+    width : 50%;
+    height : 100%;
+}
+
+.recommendedcontentslist {
+    display : flex;
+    flex-direction : column;
+    height : 52vh;
+    width : 90%;
+    border : 3px solid white;
+    border-radius: 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.recommendedloading {
+    color : white;
+    font-family: "ssangmun";
+    font-size : 2vw;
+}
+
+.scriptmakebutton {
+    width : 90%;
+    height: 8vh;
+    margin-top : 2vh;
+    background-color: white;
+    border-radius: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scriptmakebutton .text500 {
+    font-family: "ssangmun";
+    color : black;
+    font-size : 2vw;
+}
+
+.scriptmakebutton:hover {
+    background-color: var(--green200);
+}
+
+.scriptmakebutton:hover .text500 {
+    animation: blink 0.3s 3;
+}
+
+.ttsscriptpage {
+    display : flex;
+    flex-direction : column;
+    width : 50%;
+    height : 100%;
+    justify-content: start;
+    align-items: center;
+}
+
+.ttstextarea {
+    height : 50vh;
+    width : 90%;
+    border : 10px solid var(--green200);
+    background-color: white;
+    border-radius: 3rem;
+}
+
+.ttsscriptpage textarea { 
+    height : 30vh;
+    width : 27vw;
+    resize : none;
+    margin-right : 1vw;
+    margin-top : 3vh;
+    background-color: transparent;
+    color : black;
+    border : none;
+    font-size : 3vh;
+    font-family : "ssangmun";
+    padding : 2vw;
+    outline: none;
+    overflow-y: scroll;
+}
+
+.ttsmethod {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap : 2vw;
+}
+
+.makettsbutton {
+    width : 15vw;
+    height: 8vh;
+    margin-top : 2vh;
+    background-color: white;
+    border-radius: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.makettsbutton .text500 {
+    font-family: "ssangmun";
+    color : black;
+    font-size : 2vw;
+}
+
+.makettsbutton:hover {
+    background-color: var(--green200);
+}
+
+.makettsbutton:hover .text500 {
+    animation: blink 0.3s 3;
+}
+
+.voicemethod {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    background-color: transparent;
+    border-radius: 5rem;
+    margin-top : 2vh;
+    border: none;
+    height : 3vh;
+    width : 30vw;
+}
+
+.voiceicon {
+    font-size: large;
+}
+.voiceicon:hover {
+    animation: blink 0.3s 3;
+}
