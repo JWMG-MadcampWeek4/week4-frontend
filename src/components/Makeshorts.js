@@ -69,6 +69,7 @@ export function Makeshorts(){
         else if(step == 21) setStep(31);
         else {
             // after the final step
+            setStep(11);
         }
     }
 

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
+import "./Tts.css"
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+
 
 export function Tts({theme, category, update}) {
   
-  const [script, setScript] = useState('');
+  const [script, setScript] = useState("대본이 여기에 담깁니다. 수정도 가능해요.");
   const [recommendlist, setRecommendlist] = useState([]);
-  const [recommend, setRecommend] = useState('');
+  const [recommend, setRecommend] = useState(null);
   const [audioContent, setAudioContent] = useState(null);
 
   const audioFile = new Audio();
@@ -54,7 +59,8 @@ export function Tts({theme, category, update}) {
 
   // Get a script.
   const getScript = () => {
-    console.log(recommend);
+    if(recommendlist.length > 0){
+      if(recommend) {
       fetch("http://143.248.219.169:8080/script", {
           method: "POST",
           headers: {
@@ -70,6 +76,14 @@ export function Tts({theme, category, update}) {
       .catch(error => {
           console.log("error!");
       });
+    }
+    else {
+      alert("컨텐츠를 선택해주세요.");
+    }
+    }
+    else {
+      alert("잠시 기다려주세요.");
+    }
   }
 
 
@@ -88,13 +102,20 @@ export function Tts({theme, category, update}) {
   const playAudioContent = () => {
     
     if (audioContent !== null) {
-      if (audioFile.paused) {
+      if(audioFile.paused){
         const audioBlob = base64ToBlob(audioContent, 'mp3');
         audioFile.src = window.URL.createObjectURL(audioBlob);
         audioFile.play();
-      } else {
-        audioFile.pause();
       }
+    }
+    else {
+      alert("잠시만 기다려주세요.");
+    }
+  }
+
+  const pauseAudioContent = () => {
+    if(!audioFile.paused){
+      audioFile.pause();
     }
   }
 
@@ -104,31 +125,61 @@ export function Tts({theme, category, update}) {
   };
 
   return (
-      <div>
-        <div>
-          {recommendlist.length > 0 ? (
-            recommendlist.map((item) => 
-            <div onClick = {() => onSelectRecommend(item)}>{item}</div>
-            )
-          ) : (
-            <p>Loading</p>
-          )}
+      <div className = "ttsfullpage">
+        <div className = "text200">
+          Script.
         </div>
-        <div onClick = {() => getScript()}>
-          Make a script.
+        <div className = "text400">
+          주제를 고르고, 대본을 받아보세요.
         </div>
-        <textarea
-          id="testInput"
-          rows="5"
-          cols="20"
-          value={script}
-          onChange={(e) => setScript(e.target.value)}
-        ></textarea>
-        <button onClick={() => handleTestButtonClick()}>TTS 변환</button>
-        <button onClick={() => playAudioContent()}>재생 혹은 정지</button>
-        <button onClick={() => downloadClick()}>다운로드</button>
-        <button onClick={() => update(script)}>스크립트 저장 및 다음 단계로</button>
-        <textarea id="textVal" rows="5" cols="20" value={audioContent}></textarea>
+        <div className = "ttscontentpage">
+          <div className = "ttsthemepage">
+            <div className = "recommendedcontentslist">
+            {recommendlist.length > 0 ? (
+              recommendlist.map((item) => 
+              <div onClick = {() => onSelectRecommend(item)}>{item}</div>
+              )
+            ) : (
+              <div className = "recommendedloading">기다리세요...</div>
+            )}
+            </div>
+            <div className = "scriptmakebutton" onClick = {() => getScript()}>
+              <div className = "text500">
+                {(recommendlist.length > 0) ? (
+                  (recommend) ? (
+                    `Make a Script.`
+                  ) : (
+                    `Select a Content.`
+                  )
+                ) : (
+                  `Wait.`
+                )}
+              </div>
+            </div>
+          </div>
+          <div className = "ttsscriptpage">
+            <div className = "ttstextarea">
+            <textarea
+            id="testInput"
+            rows="5"
+            cols="20"
+            value={script}
+            onChange={(e) => setScript(e.target.value)}
+            ></textarea>
+            <div className = "voicemethod">
+                <PlayArrowIcon className = "voiceicon" onClick={() => playAudioContent()}/>
+                <PauseIcon className = "voiceicon" onClick={() => pauseAudioContent()}/>
+                <FileDownloadIcon className = "voiceicon" onClick={() => downloadClick()}/>
+            </div>
+            </div>
+            <div className = "ttsmethod">
+              <div className = "makettsbutton" onClick={() => handleTestButtonClick()}> <div className = "text500">
+                Make TTS.
+              </div></div>
+              <div className = "makettsbutton" onClick={() => update(script)}> <div className = "text500">Make Image</div></div>
+            </div>
+          </div>
+        </div>
       </div>
   );
 }
