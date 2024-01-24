@@ -1,147 +1,117 @@
 @import url("../lib/root.css");
 @import url("../lib/text.css");
 @import url("../lib/button.css");
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+.themeitemsfullpage {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.themeitemsfullpage .text400 {
+    margin-top : 3vh;
+}
 
 .themeitems {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
-    margin-bottom : 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3개의 열을 갖도록 설정 */
+    gap: 5vh;
+    margin-top : 20vh;
 }
 
-.fileback{
-    background-color: var(--blue100);
-    width : 12vw;
-    height: 10vw;
-    border-radius : 20px;
-    flex: 0 0 12vw;
-    margin-right : 7vw;
-    margin-left: 5vw;
-    margin-bottom: 2vw;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-}
-
-.filefront{
-    background-color: var(--blue200);
-    position: absolute;
-    z-index: 1;
-    width : 10vw;
-    height: 10vw;
-}
-
-.fileblack {
-    width: 9.5vw;
-    height: 9.5vw;
-    border-radius: 50%;
-    background: conic-gradient(from 55deg, var(--gray100) 0deg 70deg, black 70deg 360deg);
-    transform: translate(8vw, 0.25vw);
+.themeitembox {
+    background-color: white;
+    border-radius: 5rem;
+    width : 20vw;
+    height : 15vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    margin-right : 2vw;
 }
 
-.filered{
-    background-color: var(--red200);
-    width : 3vw;
-    height: 3vw;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.themeitemtext {
+    font-family: "ssangmun";
+    font-size : 3vw;
 }
 
-.fileempty {
-    background-color: var(--gray200);
-    width : 1.2vw;
-    height: 1.2vw;
-    border-radius: 50%;
-    box-shadow: 2px 1px 0px rgba(0, 0, 0, 0.5);
+.themeitembox:hover {
+    background-color: var(--green200);
 }
 
-
-.categoryitems {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.filezip {
-    width: 30vw;
-    height: 30vw;
-    border-radius: 10px solid black;
-    background-color: var(--violet400);
-    border: 8px solid var(--violet300);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-}
-
-.fileblack_cat {
-    width: 27vw;
-    height: 27vw;
-    border-radius: 50%;
-    background: conic-gradient(from 55deg, var(--gray100) 0deg 70deg, black 70deg 360deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-}
-
-.filered_cat{
-    background-color: var(--red200);
-    width : 10vw;
-    height: 10vw;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.fileempty_cat {
-    background-color: var(--gray200);
-    width : 4vw;
-    height: 4vw;
-    border-radius: 50%;
-    box-shadow: 2px 1px 0px rgba(0, 0, 0, 0.5);
-}
-
-.category {
-    width: 40vw;
-    height: 45vw;
-    display : flex;
-    flex-direction: column;
-    /* border: 1px solid black; */
-}
-
-.text_playlist { 
-    font-size: 3vw;
-    color: black;
-    margin-top : 0;
-    margin-left : 7vw;
-    text-align: start;
-
+.themeitembox:hover .themeitemtext{
+    animation: blink 0.3s 3;
 }
 
 .categoryplaylist {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    text-align: start;
-    margin-left : 7vw;
+    align-items: start;
+    flex-wrap: wrap;
 }
 
-.categoryplay {
+.categoryplaylist .text400 {
     margin-top : 3vh;
-    font-size: 1.7vw;
-    color: black;
+}
+
+.categoryitems {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3개의 열을 갖도록 설정 */
+    gap: 5vh;
+    margin-top : 10vh;
 }
 
 .inputcategory {
     display : flex;
     flex-direction: row;
+    width : 67vw;
     justify-content: space-between;
+    margin-top : 8vh;
+}
+
+.inputcategory input {
+    outline: none;
+    background-color: transparent;
+    color : white;
+    font-size: 3vw;
+    border: none;
+    font-family: "ssangmun";
+    border-bottom: 3px solid white;
+}
+
+.categorysubmit {
+    width : 15vw;
+    height: 10vh;
+    background-color: white;
+    border-radius: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.categorysubmittext {
+    font-family: "ssangmun";
+    font-size : 2vw;
+}
+
+.categorysubmit:hover {
+    background-color: var(--green200);
+}
+
+.categorysubmit:hover .categorysubmittext {
+    animation: blink 0.3s 3;
+}
+
+.goback {
+    color : white;
+    font-size: 1.5vw;
+    font-family : "ssangmun";
     margin-top : 3vh;
 }

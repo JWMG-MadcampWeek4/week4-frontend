@@ -16,6 +16,39 @@ export function ChooseImage({theme, category, script, update}){
         setStep(step);
     }
 
+    // Modify index of imageUrl.
+    const modifyImageUrl = ({index, newValue}) => {
+        const updatedImageUrl = [...imageUrl];
+        updatedImageUrl[index] = newValue;
+        setImageUrl(updatedImageUrl);
+    };
+
+    // Modify index of imageScript.
+    const modifyImageScript = ({index, newValue}) => {
+        const updatedImageScript = [...imageScript];
+        updatedImageScript[index] = newValue;
+        setImageScript(updatedImageScript);
+    };
+
+    // Remove element.
+    const removeElement = (index) => {
+        const updatedImageScript = [...imageScript];
+        const updatedImageUrl = [...imageUrl];
+        updatedImageScript.splice(index, 1);
+        setImageScript(updatedImageScript);
+        updatedImageUrl.splice(index, 1);
+        setImageUrl(updatedImageUrl);
+    };
+
+    // Append element.
+    const appendImageUrl = (newValue) => {
+        setImageUrl([...imageUrl, newValue]);
+    };
+
+    const appendImageScript = (newValue) => {
+        setImageScript([...imageScript, newValue]);
+    };
+
     // function to get imageScript
     useEffect(() => {
         if (theme === "동물") {
@@ -81,9 +114,9 @@ export function ChooseImage({theme, category, script, update}){
         <div className = "cont">
             {(imageUrl) && (imageScript) ? (
                 (view === 0) ? (
-                    <ImageGrid imageUrlList={imageUrl} imageScriptList={imageScript} update={onChangeView} />
+                    <ImageGrid imageUrlList={imageUrl} imageScriptList={imageScript} update={onChangeView} deletefunc = {removeElement} appendImageScript = {appendImageScript} appendImageUrl = {appendImageUrl}/>
                 ) : (
-                    <ScrollGrid imageUrlList = {imageUrl} imageScriptList = {imageScript} update = {onChangeView} step = {step}/>
+                    <ScrollGrid imageUrlList = {imageUrl} imageScriptList = {imageScript} update = {onChangeView} step = {step} modifyImageScript={modifyImageScript} modifyImageUrl={modifyImageUrl}/>
                 )
             ) : (
                 <p>Loading.</p>
@@ -93,10 +126,16 @@ export function ChooseImage({theme, category, script, update}){
 }
 
 // grid image
-const ImageGrid = ({imageUrlList, imageScriptList, update}) => {
+const ImageGrid = ({imageUrlList, imageScriptList, update, deletefunc, appendImageUrl, appendImageScript}) => {
     
+    const appendElement = () => {
+        appendImageUrl(require("../lib/pics/cheetah.png"));
+        appendImageScript("입력해주세요.");
+    }
+
     return (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+        <p onClick = {() => appendElement()}>추가하기</p>
         {imageUrlList.map((imageUrl, index) => (
           <div>
           <img
@@ -107,6 +146,7 @@ const ImageGrid = ({imageUrlList, imageScriptList, update}) => {
             onClick = {() => update({view : 1, step : index})}
           />
           <p>{imageScriptList[index]}</p>
+          <p onClick = {() => deletefunc(index)}>삭제하기</p>
           </div>
         ))}
       </div>
@@ -115,9 +155,33 @@ const ImageGrid = ({imageUrlList, imageScriptList, update}) => {
 
 // scroll image
 
-const ScrollGrid = ({imageUrlList, imageScriptList, update, step}) => {
+const ScrollGrid = ({imageUrlList, imageScriptList, update, step, modifyImageUrl, modifyImageScript}) => {
     
     const [text, setText] = useState(imageScriptList[step]);
+    
+    useEffect(() => {
+        setText(imageScriptList[step])
+    }, [step]);
+
+    const regenerate = () => {
+        console.log("comes in");
+        console.log(text);
+        fetch("http://143.248.219.169:8080/text2image", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ image_text : text }) // send data
+            })
+            .then(res => res.json())
+            .then(res => {
+                modifyImageUrl({index : step, newValue : base64ToURL(res.base64)});
+                modifyImageScript({index : step, newValue : text});
+            })
+            .catch(error => {
+                console.log("error!");
+            });
+    }
 
     return (
     <div>
@@ -137,6 +201,7 @@ const ScrollGrid = ({imageUrlList, imageScriptList, update, step}) => {
           <p onClick = {() => update({view:1, step: Math.min(step + 1, 11)})}>다음으로</p>
           <p onClick = {() => update({view:1, step: Math.max(step - 1, 0)})}>이전으로</p>
           <p onClick = {() => update({view:0, step: step})}>그리드로 돌아가기</p>
+          <p onClick = {() => regenerate()}>재생성하기</p>
     </div>
     )
 }
