@@ -1,10 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
 
-export function Tts() {
+export function Tts({theme, category, update}) {
   
-  const [textValue, setTextValue] = useState('');
+  const [script, setScript] = useState('');
+  const [recommendlist, setRecommendlist] = useState([]);
+  const [recommend, setRecommend] = useState('');
   const [audioContent, setAudioContent] = useState(null);
+
+  const audioFile = new Audio();
+
+  // Get recommended contents when script is given.
+  useEffect(() => {
+    if (theme === "동물") {
+    fetch("http://143.248.219.169:8080/animal_theme", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ theme: category }) // send data
+        })
+        .then(res => res.json())
+        .then(res => {
+            setRecommendlist(res);
+        })
+        .catch(error => {
+            console.log("error!");
+        });
+    }
+    else {
+      fetch("http://143.248.219.169:8080/theme", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ theme: category }) // send data
+        })
+        .then(res => res.json())
+        .then(res => {
+            setRecommendlist(res);
+        })
+        .catch(error => {
+            console.log("error!");
+        });
+    }
+
+  }, [category]);
+  
+  // Select recommend.
+  const onSelectRecommend = (e) => {
+    setRecommend(e);
+  }
+
+  // Get a script.
+  const getScript = () => {
+    console.log(recommend);
+      fetch("http://143.248.219.169:8080/script", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ content: recommend }) // send data
+      })
+      .then(res => res.json())
+      .then(res => {
+          console.log(res);
+          setScript(res.join(""));
+      })
+      .catch(error => {
+          console.log("error!");
+      });
+  }
+
 
   // Get audio content at audioContent.
   const getAudioContent = (e) => {
@@ -12,11 +79,24 @@ export function Tts() {
   };
 
 
-  // Make voice.
+  // Make voice. (TTS Change)
   const handleTestButtonClick = () => {
-    scriptToAudioContent({script: textValue, onChange: getAudioContent})
+    scriptToAudioContent({script: script, onChange: getAudioContent})
   };
 
+  // Play or pause.
+  const playAudioContent = () => {
+    
+    if (audioContent !== null) {
+      if (audioFile.paused) {
+        const audioBlob = base64ToBlob(audioContent, 'mp3');
+        audioFile.src = window.URL.createObjectURL(audioBlob);
+        audioFile.play();
+      } else {
+        audioFile.pause();
+      }
+    }
+  }
 
   // Download with mp3.
   const downloadClick = () => {
@@ -24,18 +104,31 @@ export function Tts() {
   };
 
   return (
-    <div>
-      <textarea
-        id="testInput"
-        rows="5"
-        cols="20"
-        value={textValue}
-        onChange={(e) => setTextValue(e.target.value)}
-      ></textarea>
-      <button onClick={handleTestButtonClick}>아작스실행</button>
-      <button onClick={downloadClick}>다운로드</button>
-      <textarea id="textVal" rows="5" cols="20" value = {audioContent}></textarea>
-    </div>
+      <div>
+        <div>
+          {recommendlist.length > 0 ? (
+            recommendlist.map((item) => 
+            <div onClick = {() => onSelectRecommend(item)}>{item}</div>
+            )
+          ) : (
+            <p>Loading</p>
+          )}
+        </div>
+        <div onClick = {() => getScript()}>
+          Make a script.
+        </div>
+        <textarea
+          id="testInput"
+          rows="5"
+          cols="20"
+          value={script}
+          onChange={(e) => setScript(e.target.value)}
+        ></textarea>
+        <button onClick={() => handleTestButtonClick()}>TTS 변환</button>
+        <button onClick={() => playAudioContent()}>재생 혹은 정지</button>
+        <button onClick={() => downloadClick()}>다운로드</button>
+        <textarea id="textVal" rows="5" cols="20" value={audioContent}></textarea>
+      </div>
   );
 }
 
@@ -62,7 +155,6 @@ export function scriptToAudioContent({script, onChange}){
         contentType: 'application/json; charset=UTF-8',
         success: function (res) {
           onChange(res.audioContent);
-          scriptToVoice({audioContent : res.audioContent});
         },
         error: function (request, status, error) {
           alert('오류', 'TTS 음성을 가져오는 데 실패했습니다.');

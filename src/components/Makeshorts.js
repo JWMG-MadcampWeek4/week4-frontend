@@ -16,6 +16,8 @@ export function Makeshorts(){
     const [step, setStep] = useState(11);
     const [theme, setTheme] = useState("");
     const [category, setCategory] = useState("");
+    const [script, setScript] = useState("");
+    
     var page;
     var themestyle, scriptstyle, imagestyle;
 
@@ -38,10 +40,13 @@ export function Makeshorts(){
     };
 
     const onChangeCategory = (e) => {
-        console.log("change", e);
         setCategory(e);
         goFront();
     };
+
+    const onChangeScript = (e) => {
+        setScript(e);
+    }
 
     // Step changes
     const goFront = () => {
@@ -81,7 +86,7 @@ export function Makeshorts(){
 
     }
     else if (step === 21) {
-        page = <Tts/>;
+        page = <Tts theme = {theme} category = {category} update = {onChangeScript}/>;
         themestyle = defaultPageBar;
         scriptstyle = pointPageBar;
         imagestyle = defaultPageBar;

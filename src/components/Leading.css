@@ -1,0 +1,37 @@
+@import url("../lib/root.css");
+@import url("../lib/text.css");
+@import url("../lib/button.css");
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.MainLeading {
+    width : 95vw;
+    margin-left : 2.5vw;
+    margin-right : 2.5vw;
+    margin-top : 3vh;
+}
+
+.LeadingTop {
+    width : 96vw;
+    height : 30vh;
+    background-image: url(../lib/pics/Leading.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.introdescript {
+    font-size : 1.5vw;
+    font-family : "ssangmun";
+    margin-top : 1.5vh;
+    color : white;
+}
+
