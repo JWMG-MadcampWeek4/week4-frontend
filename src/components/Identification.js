@@ -127,7 +127,7 @@ export function Signup() {
 
 
 
-export function Login() {
+export function Login({update:update}) {
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -152,8 +152,9 @@ export function Login() {
     })
     .then(res => res.json())
     .then(res => {
-        if(res.success) {
-            navigate('/main');
+        if (res.success) {
+          update({id : res.id, nick : res.nickname})
+          navigate({pathname: "/main"});
         }
         else {
             alert("Access Denied.");
