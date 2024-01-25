@@ -12,6 +12,7 @@ export function Tts({theme, category, update}) {
   const [recommendlist, setRecommendlist] = useState([]);
   const [recommend, setRecommend] = useState(null);
   const [audioContent, setAudioContent] = useState(null);
+  const [audioDuration, setAudioDuration] = useState("Time");
 
   const audioFile = new Audio();
 
@@ -61,8 +62,8 @@ export function Tts({theme, category, update}) {
     const allRecommendedContents = document.querySelectorAll('.recommendedcontent');
     allRecommendedContents.forEach((el) => {
       if (el !== cont) {
-        el.style.backgroundColor = ''; // 다른 요소들의 배경색 초기화
-        el.style.border = ''; // 다른 요소들의 테두리 초기화
+        el.style.backgroundColor = '';
+        el.style.border = '';
       }
     });
   }
@@ -106,6 +107,35 @@ export function Tts({theme, category, update}) {
   // Make voice. (TTS Change)
   const handleTestButtonClick = () => {
     scriptToAudioContent({script: script, onChange: getAudioContent})
+    fetch("http://143.248.219.184:8080/calculate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ script : script }) // send data
+        })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+            const intminutetime = Math.floor(res.presentation_time_minutes);
+            var minutetime = String(intminutetime);
+            var sectime = String((res.presentation_time_seconds)%60);
+            console.log(minutetime, sectime);
+            if (res.presentation_time_seconds < 10) {
+              sectime = "0" + sectime;
+              console.log("change", sectime);
+            }
+            if(intminutetime <= 0) {setAudioDuration("00:" + sectime)}
+            else {
+              if(intminutetime < 10) {setAudioDuration("0" + minutetime + ":" + sectime)}
+              else {
+                setAudioDuration(minutetime + ":" + sectime)
+              }
+            }
+        })
+        .catch(error => {
+            console.log("error!");
+        });
   };
 
   // Play or pause.
@@ -152,7 +182,7 @@ export function Tts({theme, category, update}) {
               </div>
               )
             ) : (
-              <div className = "recommendedloading">기다리세요...</div>
+              <div className = "recommendedloading"><div className = "text400">기다려주세요...</div></div>
             )}
             </div>
             <div className = "scriptmakebutton" onClick = {() => getScript()}>
@@ -183,12 +213,15 @@ export function Tts({theme, category, update}) {
                 <PauseIcon className = "voiceicon" onClick={() => pauseAudioContent()}/>
                 <FileDownloadIcon className = "voiceicon" onClick={() => downloadClick()}/>
             </div>
+            <div className = "voiceduration">
+                  {audioDuration}
+            </div>
             </div>
             <div className = "ttsmethod">
               <div className = "makettsbutton" onClick={() => handleTestButtonClick()}> <div className = "text500">
                 Make TTS.
               </div></div>
-              <div className = "makettsbutton" onClick={() => update(script)}> <div className = "text500">Make Image</div></div>
+              <div className = "makettsbutton" onClick={() => update(script)}> <div className = "text500">Make Image.</div></div>
             </div>
           </div>
         </div>

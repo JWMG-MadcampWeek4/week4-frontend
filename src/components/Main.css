@@ -73,10 +73,24 @@
     margin-top : 3vh;
 }
 
+.myshortstextzone {
+    width: 100%;
+    height : 3vh;
+    display : flex;
+    flex-direction : row;
+    justify-content: space-between;
+    color : white;
+}
+
 .myshortstextarea {
     font-family : "ssangmun";
     font-size : 3vh;
     color : white;
+    margin-right : 2vw;
+}
+
+.myshortstextarea:hover {
+    animation: blink 0.3s 3;
 }
 
 .myshortsarea {
@@ -85,7 +99,101 @@
     flex-direction: row;
 }
 
+.emptyshortscontent {
+    width : 100%;
+    height : 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyshortscontent .text400 {
+    color : white;
+    font-family: "ssangmun";
+    font-size : 2vw;
+    width : 80vw;
+}
+
 .myshortscontent {
     margin-top : 3vh;
     margin-right : 3vh;
+}
+
+.modalscreen {
+    width : 50vw;
+    height : 50vh;
+}
+
+.modalrequest {
+    color : white;
+    font-family : "ssangmun";
+    font-size : 1.5vw;
+    height : 2vw;
+    width : 27vw;
+}
+
+.modalrequest2 {
+    display : flex;
+    flex-direction: row;
+    height : 2vw;
+    width : 27vw;
+    gap : 3vh;
+    align-items: center;
+    justify-content: start;
+    margin-top : 3vh;
+    margin-bottom : 5vh;
+}
+
+.modalrequest2 .text500 {
+    color : white;
+    font-family : "ssangmun";
+    font-size : 1.1vw;
+    height : 2vw;
+    width : 10vw;
+    margin-top : 1.5vh;
+}
+
+.modalrequest2 input {
+    color : white;
+    border : none;
+    outline: none;
+    font-family : "ssangmun";
+    font-size : 1.1vw;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    width : 15vw;
+    height : 2vw;
+}
+
+.modalbutton {
+    display: flex;
+    flex-direction: row;
+    width : 15vw;
+    height : 4vh;
+    gap : 1vw;
+    margin-bottom: -10vh;
+}
+
+.modalbuttondesign {
+    width : 5vw;
+    height : 3vh;
+    border-radius: 5rem;
+    display : flex;
+    flex-direction : row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.modalbuttondesign:hover {
+    background-color: #40b884;
+}
+
+.modalbuttondesign:hover .modalbuttontext {
+    animation: blink 0.3s 3;
+}
+
+.modalbuttontext {
+    font-family : "ssangmun";
+    font-size : 1.8vh;
 }

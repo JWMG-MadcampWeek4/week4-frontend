@@ -5,7 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DownloadIcon from '@mui/icons-material/Download';
 
-export function ChooseImage({theme, category, script, update, goback}){
+export function ChooseImage({theme, category, script, update, goback, gofront}){
 
     const [imageScript, setImageScript] = useState(null);
     const [imageUrl, setImageUrl] = useState([require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg")]);
@@ -114,17 +114,6 @@ export function ChooseImage({theme, category, script, update, goback}){
     }
     }, [imageScript])
 
-    const downloadAll = () => {
-        if(imageUrl && imageScript) {
-            if(imageUrl.length > 0 && imageScript.length > 0) {
-                downloadImageList(imageUrl, imageScript)
-            }
-        }
-        else {
-            alert("잠시만 기다렸다가 실행해주세요.");
-        }
-    }
-
 
     return (
         <div className = "imagefullpage">
@@ -147,13 +136,9 @@ export function ChooseImage({theme, category, script, update, goback}){
                     </div>
                 </div>
                 <div className = "imageshowpage">
-                <div className = "imagegallery">
-                    <div className = "text400">AI Gallery</div>
-                    <div className = "text500" onClick = {() => downloadAll()}>Download All.</div>
-                </div>
                 {(imageUrl) && (imageScript) ? (
                     (view === 0) ? (
-                        <ImageGrid imageUrlList={imageUrl} imageScriptList={imageScript} update={onChangeView} deletefunc = {removeElement} appendImageScript = {appendImageScript} appendImageUrl = {appendImageUrl}/>
+                        <ImageGrid imageUrlList={imageUrl} imageScriptList={imageScript} update={onChangeView} deletefunc = {removeElement} appendImageScript = {appendImageScript} appendImageUrl = {appendImageUrl} gofront = {gofront}/>
                     ) : (
                         <ScrollGrid imageUrlList = {imageUrl} imageScriptList = {imageScript} update = {onChangeView} step = {step} modifyImageScript={modifyImageScript} modifyImageUrl={modifyImageUrl}/>
                     )
@@ -167,15 +152,34 @@ export function ChooseImage({theme, category, script, update, goback}){
 }
 
 // grid image
-const ImageGrid = ({imageUrlList, imageScriptList, update, deletefunc, appendImageUrl, appendImageScript}) => {
+const ImageGrid = ({imageUrlList, imageScriptList, update, deletefunc, appendImageUrl, appendImageScript, gofront}) => {
     
     const appendElement = () => {
         appendImageUrl(require("../lib/pics/loading.jpg"));
         appendImageScript("Apple");
     }
 
-    return (
+    const downloadAll = () => {
+        if(imageUrlList && imageScriptList) {
+            if(imageUrlList.length > 0 && imageScriptList.length > 0) {
+                downloadImageList(imageUrlList, imageScriptList);
+                gofront();
+            }
+            else {
+                alert("잠시만 기다렸다가 실행해주세요.");
+            }
+        }
+        else {
+            alert("잠시만 기다렸다가 실행해주세요.");
+        }
+    }
 
+    return (
+        <>
+        <div className = "imagegallery">
+                    <div className = "text400">AI Gallery</div>
+                    <div className = "text500" onClick = {() => downloadAll()}>Download All.</div>
+        </div>
         <div className = "imagegridpage" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
             {imageUrlList.map((imageUrl, index) => (
             <div className = "imagegriditem">
@@ -188,7 +192,7 @@ const ImageGrid = ({imageUrlList, imageScriptList, update, deletefunc, appendIma
                 />
                 <div className = "imagegriditemdescription">
                     <div className = "imagegriditemword">{imageScriptList[index]}</div>
-                    <div onClick = {() => deletefunc(index)} className = "imagedelete"><div className = "text500">삭제</div></div>
+                    <div onClick = {() => deletefunc(index)} className = "imagedelete"></div>
                 </div>    
             </div>
             ))}
@@ -202,6 +206,7 @@ const ImageGrid = ({imageUrlList, imageScriptList, update, deletefunc, appendIma
                 />
             </div>
       </div>
+      </>
     )
 }
 
