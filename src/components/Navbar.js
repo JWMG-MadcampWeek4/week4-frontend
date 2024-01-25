@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../lib/pics/DITTO.svg"
 import "./Navbar.css";
 
-export function Navbar(){
+export function Navbar({nick : nick}){
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -16,7 +16,6 @@ export function Navbar(){
     return (
         <div className = "navbar">
             <div className = "nav-logo-container" onClick = {navigateToHome}>
-                {/* <img src = {Logo} alt = ""/> */}
                 <p className = "text400"> ShortsMaker.</p>
             </div>
             
@@ -24,7 +23,7 @@ export function Navbar(){
                 {isLoggedIn ? (
                     <div className = "text500" onClick={navigateToHome}>Log Out</div>
                 ) : (
-                    <div className = "text500" onClick={navigateToHome}>Log In</div>
+                    <div className = "text500" onClick={navigateToHome}>Welcome, {nick}</div>
                 )}
             </div>
         </div>

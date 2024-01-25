@@ -37,12 +37,12 @@
 
 .recommendedcontentslist {
     display : grid;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     height : 52vh;
     width : 90%;
     border : 10px solid var(--gray200);
     border-radius: 3rem;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     background-image: url("../lib/pics/backscreen.png");
     background-repeat: no-repeat;
@@ -53,12 +53,11 @@
 }
 
 .recommendedcontent {
-    width : 7vh;
-    height : 4vh;
+    width : 15vh;
+    height : 12vh;
     background-color : transparent;
     margin-left : 5vh;
-    margin-bottom : 1vh;
-    margin-top : -1vh;
+    margin-top : -7vh;
     background-image: url("../lib/pics/folder.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -66,22 +65,36 @@
 }
 
 .recommendedcontent .text500 {
-    width : 9vh;
-    height : 2vh;
-    font-size : 1vh;
-    overflow-y: hidden;
-    transform : translate(-1.1vh, 4.4vh);
+    width : 8vw;
+    height : 1.5vw;
+    font-size : 1vw;
+    transform : translate(0, 14vh);
     color : white;
+    -webkit-text-stroke: 1px black;
+}
+
+.recommendedcontent:hover .text500 {
+    width : 8vw;
+    height : 1.5vw;
+    font-size : 1vw;
+    transform : translate(0, 14vh);
+    color : black;
 }
 
 
 
 .recommendedloading {
-    color : white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height : 52vh;
+    width : 100%;
+}
+
+.recommendedloading .text400 {
+    color : black;
     font-family: "ssangmun";
     font-size : 2vw;
-    align-self: center;
-    justify-self: center;
 }
 
 .scriptmakebutton {
@@ -195,4 +208,11 @@
 }
 .voiceicon:hover {
     animation: blink 0.3s 3;
+}
+
+.voiceduration {
+    font-size: 1vw;
+    font-family : "ssangmun";
+    color : black;
+    transform: translate(-1.3vw, 0.5vh);
 }

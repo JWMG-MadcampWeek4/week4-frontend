@@ -6,6 +6,7 @@ import { Tts } from "./Tts.js";
 import { ChooseImage } from "./ChooseImage.js";
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import { useNavigate } from "react-router-dom";
 
 export function Makeshorts(){
 
@@ -25,6 +26,8 @@ export function Makeshorts(){
     
     var page;
     gsap.registerPlugin(MotionPathPlugin);
+
+    const navigate = useNavigate();
 
     // Update theme, category, script and image.
     const onChangeTheme = (e) => {
@@ -70,6 +73,7 @@ export function Makeshorts(){
         else {
             // after the final step
             setStep(11);
+            navigate("/main");
         }
     }
 
@@ -94,7 +98,7 @@ export function Makeshorts(){
         page = <Tts theme = {theme} category = {category} update = {onChangeScript}/>;
     }
     else {
-        page = <ChooseImage theme = {theme} category = {category} script = {script} update = {onChangeImage} goback = {goBack}/>
+        page = <ChooseImage theme = {theme} category = {category} script = {script} update = {onChangeImage} goback = {goBack} gofront = {goFront}/>
     }
 
     const audioRef = useRef(null);
