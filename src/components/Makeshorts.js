@@ -94,7 +94,7 @@ export function Makeshorts(){
         page = <Tts theme = {theme} category = {category} update = {onChangeScript}/>;
     }
     else {
-        page = <ChooseImage theme = {theme} category = {category} script = {script} update = {onChangeImage}/>
+        page = <ChooseImage theme = {theme} category = {category} script = {script} update = {onChangeImage} goback = {goBack}/>
     }
 
     const audioRef = useRef(null);

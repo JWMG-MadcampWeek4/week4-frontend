@@ -36,20 +36,52 @@
 }
 
 .recommendedcontentslist {
-    display : flex;
-    flex-direction : column;
+    display : grid;
+    grid-template-rows: repeat(5, 1fr);
     height : 52vh;
     width : 90%;
-    border : 3px solid white;
+    border : 10px solid var(--gray200);
     border-radius: 3rem;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    background-image: url("../lib/pics/backscreen.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.8);
+    gap : 0;
 }
+
+.recommendedcontent {
+    width : 7vh;
+    height : 4vh;
+    background-color : transparent;
+    margin-left : 5vh;
+    margin-bottom : 1vh;
+    margin-top : -1vh;
+    background-image: url("../lib/pics/folder.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.recommendedcontent .text500 {
+    width : 9vh;
+    height : 2vh;
+    font-size : 1vh;
+    overflow-y: hidden;
+    transform : translate(-1.1vh, 4.4vh);
+    color : white;
+}
+
+
 
 .recommendedloading {
     color : white;
     font-family: "ssangmun";
     font-size : 2vw;
+    align-self: center;
+    justify-self: center;
 }
 
 .scriptmakebutton {
@@ -87,7 +119,7 @@
 }
 
 .ttstextarea {
-    height : 50vh;
+    height : 52vh;
     width : 90%;
     border : 10px solid var(--green200);
     background-color: white;
