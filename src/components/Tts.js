@@ -18,7 +18,7 @@ export function Tts({theme, category, update}) {
   // Get recommended contents when script is given.
   useEffect(() => {
     if (theme === "동물") {
-    fetch("http://143.248.219.169:8080/animal_theme", {
+    fetch("http://143.248.219.184:8080/animal_theme", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -34,7 +34,7 @@ export function Tts({theme, category, update}) {
         });
     }
     else {
-      fetch("http://143.248.219.169:8080/theme", {
+      fetch("http://143.248.219.184:8080/theme", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -53,15 +53,25 @@ export function Tts({theme, category, update}) {
   }, [category]);
   
   // Select recommend.
-  const onSelectRecommend = (e) => {
-    setRecommend(e);
+  const onSelectRecommend = ({item, cont}) => {
+    setRecommend(item);
+    cont.style.backgroundColor = '#4287f5';
+    cont.style.border = '3px solid #4287f5';
+
+    const allRecommendedContents = document.querySelectorAll('.recommendedcontent');
+    allRecommendedContents.forEach((el) => {
+      if (el !== cont) {
+        el.style.backgroundColor = ''; // 다른 요소들의 배경색 초기화
+        el.style.border = ''; // 다른 요소들의 테두리 초기화
+      }
+    });
   }
 
   // Get a script.
   const getScript = () => {
     if(recommendlist.length > 0){
       if(recommend) {
-      fetch("http://143.248.219.169:8080/script", {
+      fetch("http://143.248.219.184:8080/script", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -137,7 +147,9 @@ export function Tts({theme, category, update}) {
             <div className = "recommendedcontentslist">
             {recommendlist.length > 0 ? (
               recommendlist.map((item) => 
-              <div onClick = {() => onSelectRecommend(item)}>{item}</div>
+              <div onClick = {(event) => onSelectRecommend({item:item, cont: event.currentTarget})} className = "recommendedcontent">
+                <div className = "text500">{item}</div>
+              </div>
               )
             ) : (
               <div className = "recommendedloading">기다리세요...</div>

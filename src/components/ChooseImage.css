@@ -1,9 +1,287 @@
 @import url("../lib/root.css");
 @import url("../lib/text.css");
 @import url("../lib/button.css");
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.imagefullpage {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.imagefullpage .text400 {
+    margin-top : 3vh;
+}
+
+.imagecontentpage {
+    display : flex;
+    flex-direction: row;
+    width : 110%;
+    height : 70vh;
+    margin-top : 3vh
+}
+
+.imagescriptpage {
+    display : flex;
+    flex-direction : column;
+    width : 50%;
+    height : 100%;
+    justify-content: start;
+    align-items: start;
+}
 
 
-.cont {
+.imagetextarea {
+    height : 60vh;
+    width : 80%;
+    border : 10px solid var(--green200);
+    background-color: white;
+    border-radius: 3rem;
+}
+
+.imagescriptpage .text500 {
+    color : black;
+    margin-top : 2vh;
+    text-align: start;
+    margin-left : 5vh;
+}
+
+.imagescriptpage textarea { 
+    height : 40vh;
+    width : 24vw;
+    resize : none;
+    margin-right : 1vw;
+    margin-top : 3vh;
+    background-color: transparent;
+    color : black;
+    border : none;
+    font-size : 3vh;
+    font-family : "ssangmun";
+    padding : 2vw;
+    outline: none;
+    overflow-y: scroll;
+}
+
+.imageshowpage { 
+    width : 40vw;
+    height : 60vh;
+
+}
+
+.imagegallery {
+    width : 40vw;
+    height : 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imagegallery .text400 {
+    margin-left : 3vw;
+}
+
+.imageshowpage .text300 {
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    margin-top : 23vh;
+}
+
+.imageshowpage .text400 {
+    margin-bottom : 2vh;
+    margin-top : 0;
+}
+
+.imagegridpage {
     width : 100%;
-    height : 50vh;
+    height : 95%;
+    overflow-y: scroll;
+}
+
+.imagegriditem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagegriditemdescription {
+    width : 100%;
+    height : 4vh;
+    margin-top : 3vh;
+    margin-bottom : 3vh;
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imagegriditemword {
+    font-family : "ssangmun";
+    color : white;
+    font-size : 1vw;
+    margin-left : 2.8vw;
+}
+
+.imagedelete {
+    margin-right : 3vw;
+}
+
+.imagegriditemadd {
+    width : 12.672vw;
+    height : 22.176vw;
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    border : 5px solid white;
+}
+
+.imagegriditemadd:hover img {
+    animation: blink 0.3s 3;
+}
+
+.scrollgridpage {
+    width : 18.75vw;
+    height : 36vw;
+    margin-top : 9vh;
+    border : 20px solid #868e96;
+    border-radius: 3rem;
+    background-color: white;
+    transform : translate(10vw, -30vh);
+    display : flex;
+    flex-direction: column;
+}
+
+.scrollgridpage img {
+    transform: translate(0, -6.6vh);
+    border-top-left-radius: 1.7rem;
+    border-top-right-radius: 1.7rem;
+}
+
+.phonetop {
+    background-color: black;
+    width : 70%;
+    height : 3.7vh;
+    align-self: center;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    z-index : 2;
+    display : flex;
+    flex-direction : row;
+    align-items: center;
+    justify-content: center;
+
+    gap : 3vh;
+}
+
+.phonetopshort {
+    width : 1vh;
+    height : 1vh;
+    background-color: var(--gray200);
+    border-radius: 50%;
+}
+
+.phonetoplong {
+    width : 4vh;
+    height : 1vh;
+    background-color: var(--gray200);
+    border-radius: 3rem;
+}
+
+.downloadthisimage {
+    width : 100%;
+    height : 2vh;
+    margin-top : 1vh;
+    z-index : 2;
+    display : flex;
+    flex-direction: row;
+}
+
+.downloadicon {
+    z-index : 2;
+    align-items: flex-end;
+    margin-left : 16.6vw;
+}
+
+.imagedetaildescription {
+    display : flex;
+    flex-direction: column;
+    justify-content: start;
+    transform: translate(0, -4.5vh);
+    gap : 1.5vh;
+    margin-bottom : -3.5vh;
+}
+
+.imagedetailtop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 0.6vw;
+    margin-right: 0.6vw;
+    margin-bottom : -1vh;
+}
+
+.imagedetailcontent input {
+    outline : none;
+    border : none;
+    border-bottom : 2px solid black;
+    font-family: "ssangmun";
+    width : 10vw;
+    font-size : 1vw;
+}
+
+.imagedetailregenerate {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    width : 4.5vw;
+    height : 80%;
+    border-radius: 1rem;
+    border : 2px solid black;
+}
+
+.imagedetailregenerate .text500 {
+    font-family: "ssangmun";
+    font-size : 0.7vw;
+    color : black;
+}
+
+.imagedetailregenerate:hover .text500 {
+    animation: blink 0.3s 3;
+}
+
+.imagedetailregenerate:hover {
+    background-color: var(--green200);
+}
+
+.imagedetailbottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width : 100%;
+    height : 5vh;
+    background-color: var(--gray200);
+    transform: translate(0, 1.2vh);
+    border-bottom-left-radius: 1.8rem;
+    border-bottom-right-radius: 1.8rem;
+
+}
+
+.imagegoback {
+    font-size : 0.9vw;
+    font-family: "ssangmun";
+    color : black;
+}
+
+.imagegoback:hover {
+    animation: blink 0.3s 3;
 }

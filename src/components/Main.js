@@ -14,7 +14,7 @@ export function Main({id, nick}){
     const [myshortsUrl, setMyshortsUrl] = useState([]);
 
     useEffect(() => {
-    fetch("http://143.248.219.169:8080/get_url", {
+    fetch("http://143.248.219.184:8080/get_url", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export function Main({id, nick}){
     }, [myshortsUrl]);
 
     const reg_short = () => {
-        fetch("http://143.248.219.169:8080/set_url", {
+        fetch("http://143.248.219.184:8080/set_url", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json"

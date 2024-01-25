@@ -27,7 +27,7 @@ export function Signup() {
   const doubleCheck = () => {
     
     //e.preventDefault();
-    fetch("http://143.248.219.169:8080/signup_id", {
+    fetch("http://143.248.219.184:8080/signup_id", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -55,7 +55,7 @@ export function Signup() {
     
     if(isChecked){
       if (!finalCheck){
-        fetch("http://143.248.219.169:8080/signup", {
+        fetch("http://143.248.219.184:8080/signup", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -143,7 +143,7 @@ export function Login({update:update}) {
 
   const handleSubmit = (e) => {
     
-    fetch("http://143.248.219.169:8080/login", {
+    fetch("http://143.248.219.184:8080/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
