@@ -23,7 +23,7 @@ export function Navbar({nick : nick}){
                 {isLoggedIn ? (
                     <div className = "text500" onClick={navigateToHome}>Log Out</div>
                 ) : (
-                    <div className = "text500" onClick={navigateToHome}>Welcome, {nick}</div>
+                    <div className = "text500" onClick={navigateToHome}>Welcome!</div>
                 )}
             </div>
         </div>
