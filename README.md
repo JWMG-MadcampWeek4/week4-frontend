@@ -78,7 +78,7 @@
 
 ### script
 
-![4. 대본 생성 결과.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/5bf6b66c-416e-4145-97ad-64a052bf4649/4._%EB%8C%80%EB%B3%B8_%EC%83%9D%EC%84%B1_%EA%B2%B0%EA%B3%BC.png)
+![KakaoTalk_Photo_2024-01-26-14-23-43 002](https://github.com/JWMG-MadcampWeek4/week4-frontend/assets/149568715/8320848e-6d12-406d-aa2c-bed0cf00649f)
 
 ### Major Features
 
@@ -96,10 +96,8 @@
 
 ### image
 
-![Image_all.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/e3484818-bd2c-42a2-91aa-f5ec9100dcfe/Image_all.png)
-
-![6. 이미지 갤러리 2.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/a8e679df-8493-49d3-90b5-349b31e393ab/6._%EC%9D%B4%EB%AF%B8%EC%A7%80_%EA%B0%A4%EB%9F%AC%EB%A6%AC_2.png)
-
+![Image_all](https://github.com/JWMG-MadcampWeek4/week4-frontend/assets/149568715/05ffa1ea-4822-4569-aebe-b3fa19bc5251)
+![Image_sole](https://github.com/JWMG-MadcampWeek4/week4-frontend/assets/149568715/488aae7a-aef2-4be8-9be7-323ed5bda635)
 ### Major Features
 
 - 대본의 내용에 맞게, 이미지를 총 12개 생성해줍니다.
