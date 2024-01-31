@@ -3,7 +3,7 @@ import "./Leading.css"
 import { Navbar } from "./Navbar"
 import { useNavigate } from "react-router-dom";
 
-export function Leading() {
+export function Leading({id, nick}) {
     
     const navigate = useNavigate();
     
@@ -25,7 +25,7 @@ export function Leading() {
     ];
     return (
         <>
-            <Navbar/>
+            <Navbar nick = {nick}/>
             <div className = "MainLeading">
                 <div className = "LeadingTop">
                     <div className = "LeadingToptextarea">
@@ -59,7 +59,7 @@ export function Leading() {
                 
                 <div className="SplitContainerReverse">
                     <div className="ImageSectionReverse">
-                        <img src="" alt="설명" />
+                        
                     </div>
                     <div className="DescriptionSectionReverse">
                         <p>나만의 이미지로 만드는 Shorts</p>
@@ -70,7 +70,7 @@ export function Leading() {
                         <img key={index} className="scroll-image" src={src} alt="Puppy" />
                     ))}
                 </div>
-                <div className = "makeshortsbutton">
+                <div className = "makeshortsbutton" onClick = {() => goToMake()}>
                     <div className = "makeshortsbuttontext" onClick = {() => goToMake()}>Let's Go.</div>
                 </div>
             </div>

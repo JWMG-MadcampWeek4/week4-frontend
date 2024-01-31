@@ -72,6 +72,7 @@ export function Tts({theme, category, update}) {
   const getScript = () => {
     if(recommendlist.length > 0){
       if(recommend) {
+        setScript("대본을 가져오는 동안 잠시만 기다려주세요.");
       fetch("http://143.248.219.184:8080/script", {
           method: "POST",
           headers: {
@@ -107,6 +108,11 @@ export function Tts({theme, category, update}) {
   // Make voice. (TTS Change)
   const handleTestButtonClick = () => {
     scriptToAudioContent({script: script, onChange: getAudioContent})
+    
+  };
+
+  // Get recommended contents when script is given.
+  useEffect(() => {
     fetch("http://143.248.219.184:8080/calculate", {
           method: "POST",
           headers: {
@@ -136,7 +142,8 @@ export function Tts({theme, category, update}) {
         .catch(error => {
             console.log("error!");
         });
-  };
+
+  }, [script]);
 
   // Play or pause.
   const playAudioContent = () => {

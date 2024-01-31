@@ -94,7 +94,7 @@ export function Main({id, nick}){
                     <div className = "myshortstextarea" onClick = {() => reg_short()}>추가하기</div>
                 </div>
                 <div className = "myshortsarea">
-                    { (myshortsUrl) ? (
+                    { (myshortsUrl && myshortsUrl.length > 0) ? (
                     
                     myshortsUrl.map((item) =>(
                     <div className = "myshortscontent">
