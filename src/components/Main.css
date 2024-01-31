@@ -50,13 +50,14 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    margin-bottom : 10vh;
 }
 
 .makeshortsbutton:hover {
     background-color: #40b884;
 }
 
-.makeshortsbutton:hover .makeshortsbuttontext {
+.loading.png:hover .makeshortsbuttontext {
     animation: blink 0.3s 3;
 }
 
@@ -79,6 +80,7 @@
     display : flex;
     flex-direction : row;
     justify-content: space-between;
+    align-items: center;
     color : white;
 }
 

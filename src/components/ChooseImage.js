@@ -8,7 +8,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 export function ChooseImage({theme, category, script, update, goback, gofront}){
 
     const [imageScript, setImageScript] = useState(null);
-    const [imageUrl, setImageUrl] = useState([require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg"), require("../lib/pics/loading.jpg")]);
+    const [imageUrl, setImageUrl] = useState([require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png"), require("../lib/pics/loading.png")]);
     const [getanimage, setGetanimage] = useState(true);
     const [view, setView] = useState(0);
     const [step, setStep] = useState(0);
@@ -96,7 +96,7 @@ export function ChooseImage({theme, category, script, update, goback, gofront}){
 
     useEffect(() => {
     if(imageScript && getanimage) {
-        fetch("http://143.248.219.184:8080/", {
+        fetch("http://143.248.219.184:8080/list2image", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json"
@@ -155,7 +155,7 @@ export function ChooseImage({theme, category, script, update, goback, gofront}){
 const ImageGrid = ({imageUrlList, imageScriptList, update, deletefunc, appendImageUrl, appendImageScript, gofront}) => {
     
     const appendElement = () => {
-        appendImageUrl(require("../lib/pics/loading.jpg"));
+        appendImageUrl(require("../lib/pics/loading.png"));
         appendImageScript("Apple");
     }
 

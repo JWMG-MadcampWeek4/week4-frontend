@@ -37,7 +37,7 @@ function App() {
           <Route exact  path = "/main" element = {<Main id = {userId} nick = {userNick}/>} />
           <Route exact path="/signup" element={<Landing opt = {0} update = {onUserInfoChange} />}/>
           <Route exact path="/login" element={<Landing opt = {1} update = {onUserInfoChange}/>}/>
-          <Route exact path="/leading" element={<Leading />}/>
+          <Route exact path="/leading" element={<Leading id = {userId} nick = {userNick}/>}/>
           <Route exact path="/make" element={<Makeshorts />}/>
           <Route exact path="/tts" element={<Tts />}/>
           <Route exact path="/text" element={<Textcheck />}/>
